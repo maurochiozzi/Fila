@@ -12,7 +12,7 @@ package fila;
 public class Consumidor {
     /**
      * Define o reflexo do consumidor: tempo que ele vai levar para reagir
-     * quando a fila andar.
+     * quando a fila andar, em milisegundos.
      */
     private final int reflexo;
     
@@ -45,21 +45,21 @@ public class Consumidor {
     public Consumidor(int reflexo, int peso){
         this.reflexo = reflexo;
         this.peso = peso;
-        this.tempoEntrada = System.currentTimeMillis();
+        tempoEntrada = System.currentTimeMillis();
     }
     
     /**
      * Inicia o atendimento do consumidor.
      */
     public void iniciouAtendimento(){
-        this.tempoInicioAtendimento = System.currentTimeMillis();
+        tempoInicioAtendimento = System.currentTimeMillis();
     }
     
     /**
      * Encerra o atendimento do consumidor.
      */
     public void encerrouAtendimento(){
-        this.tempoTerminioAtendimento = System.currentTimeMillis();
+        tempoTerminioAtendimento = System.currentTimeMillis();
     }
     
     /**
@@ -68,7 +68,7 @@ public class Consumidor {
      * @return tempo de espera na fila
      */
     public Long getTempoEsperaFila(){
-        return this.tempoInicioAtendimento - this.tempoEntrada;
+        return tempoInicioAtendimento - tempoEntrada;
     }
     
     /**
@@ -77,12 +77,16 @@ public class Consumidor {
      * @return  tempo de atendimento
      */
     public Long getTempoEsperaAtendimento(){
-        return this.tempoTerminioAtendimento - this.tempoInicioAtendimento;
+        return tempoTerminioAtendimento - tempoInicioAtendimento;
+    }
+    
+    public int getPeso(){
+        return peso;
     }
 
     @Override
     public String toString(){
-        return "Reflexo=" + this.reflexo + ", Peso=" + peso + ", Tempo espera fila=" + getTempoEsperaFila() 
+        return "Reflexo=" + reflexo + ", Peso=" + peso + ", Tempo espera fila=" + getTempoEsperaFila() 
                 + ", Tempo espera atendimento=" + getTempoEsperaAtendimento();
     }
 }
