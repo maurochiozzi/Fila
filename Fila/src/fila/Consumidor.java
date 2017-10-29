@@ -5,6 +5,8 @@
  */
 package fila;
 
+import java.util.Random;
+
 /**
  *
  * @author Mauro
@@ -14,7 +16,7 @@ public class Consumidor {
      * Define o reflexo do consumidor: tempo que ele vai levar para reagir
      * quando a fila andar, em milisegundos.
      */
-    private final int reflexo;
+    private final Long reflexo;
     
     /**
      * Peso associado a quantidade de itens do consumidor, na ordem de 1 a 10.
@@ -38,13 +40,12 @@ public class Consumidor {
     
     /**
      * Constroi um consumido com as informações básicas dele.
-     * 
-     * @param reflexo
-     * @param peso 
      */
-    public Consumidor(int reflexo, int peso){
-        this.reflexo = reflexo;
-        this.peso = peso;
+    public Consumidor(){
+        Random gerador = new Random();
+        
+        reflexo = gerador.nextLong() % 1000 + 1;
+        peso = gerador.nextInt() % 10 + 1;
         tempoEntrada = System.currentTimeMillis();
     }
     
@@ -80,6 +81,11 @@ public class Consumidor {
         return tempoTerminioAtendimento - tempoInicioAtendimento;
     }
     
+    /**
+     * Retorna o valor do peso da operação do consumidor.
+     * 
+     * @return peso da operação
+     */
     public int getPeso(){
         return peso;
     }
